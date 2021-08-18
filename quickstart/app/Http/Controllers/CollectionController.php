@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
+use App\Models\Word;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class CollectionController extends Controller
 {
@@ -14,7 +16,9 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        //
+        $collections = Collection::all();
+
+        return view('collections', ['collections' => $collections]);
     }
 
     /**
@@ -35,7 +39,11 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newCollection = new Collection;
+        $newCollection->name = $request->name;
+        $newCollection->save();
+
+        return redirect()->route('collections.index');
     }
 
     /**
@@ -46,7 +54,12 @@ class CollectionController extends Controller
      */
     public function show(Collection $collection)
     {
-        //
+        $words = $collection->words()->with('collections')->get();
+        $notAttachedWord = Word::whereDoesntHave('collections', function (Builder $query)  use ($collection) {
+            $query->where('id', $collection->id);
+        })->get();
+
+        return view('collection', ['collection' => $collection, 'words' => $words, 'notAttachedWord' => $notAttachedWord]);
     }
 
     /**
@@ -69,7 +82,10 @@ class CollectionController extends Controller
      */
     public function update(Request $request, Collection $collection)
     {
-        //
+        $collection->name = $request->name;
+        $collection->update();
+
+        return redirect()->route('collections.index');
     }
 
     /**
@@ -80,6 +96,22 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection)
     {
-        //
+        $collection->delete();
+
+        return redirect()->route('collections.index');
+    }
+
+    public function attach(Collection $collection, Word $word)
+    {
+        $collection->words()->attach($word->id);
+
+        return redirect()->route('collections.show', ['collection' => $collection]);
+    }
+
+    public function detach(Collection $collection, Word $word)
+    {
+        $collection->words()->detach($word->id);
+
+        return redirect()->route('collections.show', ['collection' => $collection]);
     }
 }
