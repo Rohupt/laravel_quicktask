@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\WordController;
+use App\Http\Controllers\LocaleController;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,8 @@ use App\Http\Controllers\WordController;
 */
 
 Route::get('/', [CollectionController::class, 'index'])->name('home');
+
+Route::get('/locale/{locale}', [LocaleController::class, 'getLocale'])->name('locale');
 
 Route::resources([
     'collections' => CollectionController::class,
