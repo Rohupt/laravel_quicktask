@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\WordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CollectionController::class, 'index'])->name('home');
+
+Route::resources([
+    'collections' => CollectionController::class,
+    'words' => WordController::class,
+]);
+
+Route::post('collections/{collection}/attach/{word}', [CollectionController::class, 'attach'])->name('collections.attach');
+Route::delete('collections/{collection}/detach/{word}', [CollectionController::class, 'detach'])->name('collections.detach');

@@ -14,7 +14,8 @@ class WordController extends Controller
      */
     public function index()
     {
-        //
+        $words = Word::all();
+        return view('words', ['words' => $words]);
     }
 
     /**
@@ -35,7 +36,12 @@ class WordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newWord = new Word;
+        $newWord->entry = $request->entry;
+        $newWord->comment = $request->comment;
+        $newWord->save();
+
+        return redirect()->route('words.index');
     }
 
     /**
@@ -69,7 +75,11 @@ class WordController extends Controller
      */
     public function update(Request $request, Word $word)
     {
-        //
+        $word->entry = $request->entry;
+        $word->comment = $request->comment;
+        $word->update();
+
+        return redirect()->route('words.index');
     }
 
     /**
@@ -80,6 +90,8 @@ class WordController extends Controller
      */
     public function destroy(Word $word)
     {
-        //
+        $word->delete();
+
+        return redirect()->route('words.index');
     }
 }
