@@ -30,7 +30,7 @@
                         <td></td>
                         <td colspan="2">
                             <div>
-                                {{ __('Collections: ') }}
+                                {{ __('Collections') . ": " }}
                                 @foreach ($word->collections as $col)
                                     <a class="badge badge-pill badge-primary" href={{ route('collections.show', ['collection' => $col]) }}>{{ $col->name }}</a>
                                 @endforeach
@@ -81,7 +81,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editWordModalLabel">
-                        {{ __('Edit Word').": " }}
+                        {{ __('Edit Word') . ": " }}
                     </h5>
                 </div>
                 <div class="modal-body">
@@ -113,7 +113,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteWordModalLabel">
-                        {{ __('Delete Word').": " }}
+                        {{ __('Delete Word') . ": " }}
                     </h5>
                 </div>
                 <div class="modal-body">

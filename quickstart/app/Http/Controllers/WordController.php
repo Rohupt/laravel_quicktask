@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Word;
-use Illuminate\Http\Request;
+use App\Http\Requests\WordRequest;
 
 class WordController extends Controller
 {
@@ -34,7 +34,7 @@ class WordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WordRequest $request)
     {
         $newWord = new Word;
         $newWord->entry = $request->entry;
@@ -73,7 +73,7 @@ class WordController extends Controller
      * @param  \App\Models\Word  $word
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Word $word)
+    public function update(WordRequest $request, Word $word)
     {
         $word->entry = $request->entry;
         $word->comment = $request->comment;

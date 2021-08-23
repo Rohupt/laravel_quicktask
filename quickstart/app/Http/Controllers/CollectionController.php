@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use App\Models\Word;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\CollectionRequest;
 
 class CollectionController extends Controller
 {
@@ -37,7 +37,7 @@ class CollectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CollectionRequest $request)
     {
         $newCollection = new Collection;
         $newCollection->name = $request->name;
@@ -80,7 +80,7 @@ class CollectionController extends Controller
      * @param  \App\Models\Collection  $collection
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Collection $collection)
+    public function update(CollectionRequest $request, Collection $collection)
     {
         $collection->name = $request->name;
         $collection->update();

@@ -30,7 +30,7 @@
                         <td></td>
                         <td colspan="2">
                             <div>
-                                {{ __('Collections: ') }}
+                                {{ __('Collections') . ": " }}
                                 @foreach ($word->collections as $col)
                                     <a class="badge badge-pill badge-primary" href={{ route('collections.show', ['collection' => $col]) }}>{{ $col->name }}</a>
                                 @endforeach
@@ -54,7 +54,7 @@
                     </h5>
                 </div>
                 <div class="modal-body">
-                    <form id="addWordToClctnForm" action={{ route('collections.show', ['collection' => $collection->id])."/attach/" }} method="post">
+                    <form id="addWordToClctnForm" action={{ route('collections.show', ['collection' => $collection->id]) . "/attach/" }} method="post">
                         @csrf
                         <div class="form-group row">
                             <label for="wordSelection" class="col-form-label col-sm-2">{{ __('Word') }}</label>
@@ -79,11 +79,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteWordModalLabel">
-                        {{ __('Delete Word').": " }}
+                        {{ __('Delete Word') . ": " }}
                     </h5>
                 </div>
                 <div class="modal-body">
-                    <form id="deleteWordFromClctnForm" action={{ route('collections.show', ['collection' => $collection->id])."/detach/" }} method="post">
+                    <form id="deleteWordFromClctnForm" action={{ route('collections.show', ['collection' => $collection->id]) . "/detach/" }} method="post">
                         @method('DELETE')
                         @csrf
                         <div class="form-group row justify-content-center">

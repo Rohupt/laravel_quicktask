@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', Illuminate\Support\Facades\App::currentLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +28,8 @@
                 </a>
 
                 <ul class="navbar-nav navbar-right ml-auto">
+                    <li class="nav-item"><a class="nav-link" href={{ route('locale', ['locale' => 'en']) }}>EN</a></li>
+                    <li class="nav-item"><a class="nav-link" href={{ route('locale', ['locale' => 'vi']) }}>VI</a></li>
                     <li class="nav-item"><a class="nav-link" href={{ route('collections.index') }}>{{ __('Collections') }}</a></li>
                     <li class="nav-item"><a class="nav-link" href={{ route('words.index') }}>{{ __('Words') }}</a></li>
                 </ul>
@@ -42,6 +44,15 @@
         @yield('navbars')
 
         <main class="py-4">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="m-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @yield('content')
         </main>
 

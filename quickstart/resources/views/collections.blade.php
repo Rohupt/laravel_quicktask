@@ -61,7 +61,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editClctnModalLabel">
-                        {{ __('Edit Collection').": " }}
+                        {{ __('Edit Collection') . ": " }}
                     </h5>
                 </div>
                 <div class="modal-body">
@@ -87,7 +87,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteClctnModalLabel">
-                        {{ __('Delete Collection').": " }}
+                        {{ __('Delete Collection') . ": " }}
                     </h5>
                 </div>
                 <div class="modal-body">
